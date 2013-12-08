@@ -34,14 +34,16 @@
 
 //生成 该节点 x y 宽和高
 -(void) spawnAtX:(NSInteger)x Y:(NSInteger)y Width:(CGFloat)w Height:(CGFloat) h addWidth2:(NSInteger)a AddHeigh2:(NSInteger)b;
-
--(void) respawn;// 重新生成 
+-(void) spawnAtX2:(NSInteger)x Y:(NSInteger)y Width:(CGFloat)w Height:(CGFloat) h addWidth2:(NSInteger)a AddHeigh2:(NSInteger)b;
+-(void) respawn;// 重新生成
+-(void)respawn2;
 
 -(void) spawnDropdown;//生成后掉落下来
-
+-(void)  spawnDropdown2;
 -(void) resetPropertyA:(NSInteger)x Y:(NSInteger)y;// 重置属性 x和y坐标值
 
 -(void) resetDropdown;// 重置后掉落函数
+-(void)resetDropdown2;
 
 -(BOOL) positionInContent:(CGPoint) pos;// 判断是移动的点是否在 检查范围内
 

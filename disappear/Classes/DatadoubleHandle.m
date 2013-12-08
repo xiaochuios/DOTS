@@ -41,7 +41,7 @@ static inline int calcIndex(int x,int y){
                 
                 DrawSprite * drawZ = [DrawSprite node];
                 [m_drawSpriteArray2 addObject:drawZ];
-                [drawZ spawnAtX:x Y:y Width:DRAWSPRITE_WIDTH Height:DRAWSPRITE_HEIGH addWidth2:200 AddHeigh2:650];
+                [drawZ spawnAtX2:x Y:y Width:DRAWSPRITE_WIDTH Height:DRAWSPRITE_HEIGH addWidth2:580 AddHeigh2:900];
                 [self addChild:drawZ z:1];
                 
             }
@@ -80,7 +80,7 @@ static inline int calcIndex(int x,int y){
         for (DrawSprite * node in m_drawSpriteArray2) {
             
             if (node) {
-                [node spawnDropdown];
+                [node spawnDropdown2];
             }
         }
     }
@@ -174,6 +174,7 @@ static inline int calcIndex(int x,int y){
         [self playingSound:m_stackArray.count];
         m_currentDrawColor = ds.m_color;
         m_drawLine = YES;
+       // NSLog(@"%@", m_currentDrawColor);
         return YES;
     }
     return NO;
@@ -189,8 +190,8 @@ static inline int calcIndex(int x,int y){
     }
     
     m_movePos = local;
-    m_objectHasContina = NO;
-    m_removeAllSameColor = NO;
+    m_objectHasContina2 = NO;
+    m_removeAllSameColor2 = NO;
     
     if (m_stackArray2.count !=0) {
         for (DrawSprite * node in m_stackArray2) {
@@ -204,7 +205,7 @@ static inline int calcIndex(int x,int y){
     //NSLog(@"after getCurrentSelectSprite2");
     
     if (ds && [ds selectedType]) {
-        NSLog(@"begin2");
+        //NSLog(@"begin2");
         [m_stackArray2 addObject:ds];
         [self playingSound:m_stackArray2.count];
         m_currentDrawColor2 = ds.m_color;
@@ -282,18 +283,18 @@ static inline int calcIndex(int x,int y){
     //NSLog(@"");
     
     if (ds && ccc4FEqual(m_currentDrawColor2, ds.m_color)) {
-        NSLog(@"if (ds && ccc4FEqual(m_currentDrawColor2, ds.m_color)) ");
+        //NSLog(@"if (ds && ccc4FEqual(m_currentDrawColor2, ds.m_color)) ");
         if (ds == [m_stackArray2 lastObject]) {
             return;
         }
         if (m_stackArray2.count >=2 &&
             ds == [m_stackArray2 objectAtIndex:(m_stackArray2.count-2)]) {//退一格
-            NSLog(@"m_stackArray2.count >=2 &&ds == [m_stackArray2 objectAtIndex:(m_stackArray2.count-2)]");
+            //NSLog(@"m_stackArray2.count >=2 &&ds == [m_stackArray2 objectAtIndex:(m_stackArray2.count-2)]");
             DrawSprite * tds = [m_stackArray2 lastObject];
             [tds unselected];
-            if (m_objectHasContina) {
-                m_removeAllSameColor = NO;
-                m_objectHasContina = NO;
+            if (m_objectHasContina2) {
+                m_removeAllSameColor2 = NO;
+                m_objectHasContina2 = NO;
             }
             [m_stackArray2 removeLastObject];
             [ds selectedType];
@@ -302,16 +303,16 @@ static inline int calcIndex(int x,int y){
         }
         
 //        if (!m_objectHasContina && [m_stackArray2 containsObject:ds]) {
-        if (!m_objectHasContina && [m_stackArray2 containsObject:ds]) {
-            NSLog(@"if (!m_objectHasContina && [m_stackArray2 containsObject:ds])");
+        if (!m_objectHasContina2 && [m_stackArray2 containsObject:ds]) {
+            //NSLog(@"if (!m_objectHasContina && [m_stackArray2 containsObject:ds])");
             DrawSprite * tds = [m_stackArray2 lastObject];
             
             NSInteger absValue = abs(ds.m_x - tds.m_x) + abs(ds.m_y - tds.m_y);
             [ds unselected];
             if (absValue == 1 && [ds selectedType]) {
                 
-                m_objectHasContina = YES;
-                m_removeAllSameColor = YES;
+                m_objectHasContina2 = YES;
+                m_removeAllSameColor2 = YES;
                 
                 [m_stackArray2 addObject:ds];
                 
@@ -319,11 +320,11 @@ static inline int calcIndex(int x,int y){
             }
         }
         
-        if (m_objectHasContina && [m_stackArray2 containsObject:ds]) {
+        if (m_objectHasContina2 && [m_stackArray2 containsObject:ds]) {
             return;
         }
         
-        m_objectHasContina = NO;
+        m_objectHasContina2 = NO;
         DrawSprite * tds = [m_stackArray2 lastObject];
         
         NSInteger absValue = abs(ds.m_x - tds.m_x) + abs(ds.m_y - tds.m_y);
@@ -344,7 +345,9 @@ static inline int calcIndex(int x,int y){
     NSInteger disappearCount = 0;
     
     if (m_stackArray.count>=2) {
+        NSLog(@"if (m_stackArray.count>=2) {");
         if (m_removeAllSameColor) {
+            NSLog(@"if (m_removeAllSameColor) {");
             
             [self disappearAllSameColorDotsWithSelected];
             
@@ -383,8 +386,9 @@ static inline int calcIndex(int x,int y){
     NSInteger disappearCount = 0;
     
     if (m_stackArray2.count>=2) {
-        if (m_removeAllSameColor) {
-            
+        //NSLog(@"if (m_stackArray2.count>=2) {");
+        if (m_removeAllSameColor2) {
+            //NSLog(@"if (m_removeAllSameColor2) {");
             [self disappearAllSameColorDotsWithSelected2];
             
         }else{
@@ -433,19 +437,6 @@ static inline int calcIndex(int x,int y){
             count ++;
         }
     }
-//    //双人部分开始
-//    for (int i=0; i<m_drawSpriteArray2.count; i++) {
-//        DrawSprite * node = [m_drawSpriteArray2 objectAtIndex:i];
-//        if (node && ccc4FEqual(m_currentDrawColor, node.m_color)) {
-//            if (dis) {
-//                [node disappear:YES];
-//                dis = NO;
-//            }
-//            [node disappear:NO];
-//            count ++;
-//        }
-//    }
-//    //双人部分开结束
     return count;
 }
 
@@ -496,6 +487,8 @@ static inline int calcIndex(int x,int y){
 //        ccDrawLine(pos, m_movePos);
     }
     if (m_drawLine2 && m_canPlaying) {
+        
+        glLineWidth(10);
         ccColor4B c4b2 = ccc4BFromccc4F(m_currentDrawColor2);
         ccDrawColor4B(c4b2.r, c4b2.g, c4b2.b, c4b2.a);
         
@@ -550,14 +543,14 @@ static inline int calcIndex(int x,int y){
         
         DrawSprite * ds = (DrawSprite*)[dropArray2 objectAtIndex:i];
         
-        [ds resetDropdown];
+        [ds resetDropdown2];
     }
-    for (int i = 0; i< m_drawSpriteArray1.count; i++) {
+    for (int i = 0; i< m_drawSpriteArray2.count; i++) {
         
         DrawSprite * ds = (DrawSprite*)[m_drawSpriteArray2 objectAtIndex:i];
         
         if (ds.m_disappear) {
-            [ds respawn];
+            [ds respawn2];
         }
     }
     //双人部分结束
@@ -662,6 +655,7 @@ static inline int calcIndex(int x,int y){
             
             m_currentDrawColor = ds.m_color;
             count = [self disappearAllSameColorDotsWithSelected];
+            //NSLog(@"count = [self disappearAllSameColorDotsWithSelected];");
         }else{
             [ds disappear:YES];
             count = 1;
@@ -694,7 +688,7 @@ static inline int calcIndex(int x,int y){
         
         if (m_toolsDisappearType2) {
             
-            m_currentDrawColor = ds.m_color;
+            m_currentDrawColor2 = ds.m_color;
             count = [self disappearAllSameColorDotsWithSelected2];
         }else{
             [ds disappear:YES];
@@ -820,11 +814,11 @@ static inline int calcIndex(int x,int y){
 
     
         if(glLocation.y<500){
-            NSLog(@"第一个手指begin");
+            //NSLog(@"第一个手指begin");
             [self touchBegine:glLocation];
         }
         if(glLocation.y>600){
-            NSLog(@"第二个手指begin");
+            //NSLog(@"第二个手指begin");
             [self touchBegine2:glLocation];
         }
     }
@@ -850,11 +844,11 @@ static inline int calcIndex(int x,int y){
     glLocation = [self convertToNodeSpace:glLocation];
 
         if(glLocation.y<500){
-           NSLog(@"第一个手指move");
+           //NSLog(@"第一个手指move");
            [self touchMove:glLocation];
         }
        if(glLocation.y>600){
-           NSLog(@"第二个手指move");
+          // NSLog(@"第二个手指move");
             [self touchMove2:glLocation];
        }
     
@@ -886,11 +880,11 @@ static inline int calcIndex(int x,int y){
         glLocation = [self convertToNodeSpace:glLocation];
         
         if(glLocation.y<500){
-            NSLog(@"第一个手指move");
+            //NSLog(@"第一个手指move");
             [self touchEnd];
         }
         if(glLocation.y>600){
-            NSLog(@"第二个手指move");
+            //NSLog(@"第二个手指move");
             [self touchEnd2];
         }
     }
@@ -905,11 +899,11 @@ static inline int calcIndex(int x,int y){
         glLocation = [self convertToNodeSpace:glLocation];
         
         if(glLocation.y<500){
-            NSLog(@"第一个手指move");
+            //NSLog(@"第一个手指move");
             [self touchEnd];
         }
         if(glLocation.y>600){
-            NSLog(@"第二个手指move");
+            //NSLog(@"第二个手指move");
             [self touchEnd2];
         }
     }
@@ -918,11 +912,13 @@ static inline int calcIndex(int x,int y){
 -(void)moveOut{
     m_canPlaying = false;
     [self setVisible:false];
+    [self setTouchEnabled:NO];
 }
 
 -(void)moveIn{
     m_canPlaying = true;
     [self setVisible:true];
+    [self setTouchEnabled:YES];
 }
 
 

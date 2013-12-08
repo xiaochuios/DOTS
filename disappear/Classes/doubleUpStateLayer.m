@@ -23,12 +23,15 @@
         m_timeItem = [CCMenuItemImage itemWithNormalImage:@"Images/timebutton.png"
                                             selectedImage:@"Images/time_unselect.png" target:self selector:@selector(menuBePressed:)];
         
-        [m_scoreItem setAnchorPoint:ccp(0, 0)];
-        [m_timeItem setAnchorPoint:ccp(1, 0)];
+        [m_scoreItem setAnchorPoint:ccp(1, 0)];
+        [m_timeItem setAnchorPoint:ccp(0, 0)];
         
-        [m_scoreItem setPosition:ccp(0, 0)];
-        [m_timeItem setPosition:ccp(s.width/2+70, 82)];
-        [m_timeItem setRotation:180];
+//        [m_scoreItem setPosition:ccp(0, 0)];
+//        [m_timeItem setPosition:ccp(s.width/2+70, 82)];
+//        [m_timeItem setRotation:180];
+                [m_scoreItem setPosition:ccp(s.width/2+225, 53)];
+                [m_timeItem setPosition:ccp(0, 0)];
+                [m_scoreItem setRotation:180];
         
         
         CCMenu * menu = [CCMenu menuWithItems:m_scoreItem, m_timeItem, nil];
@@ -47,32 +50,32 @@
         
         [scorelabel setAnchorPoint:ccp(0, 0.5)];
         [scorelabel setColor:ccc3(0, 0, 0)];
-        [scorelabel setPosition:ccp(m_scoreItem.contentSize.width/2-100,
-                                    m_scoreItem.contentSize.height/2)];
+        [scorelabel setPosition:ccp(m_scoreItem.contentSize.width/2-50,
+                                    m_scoreItem.contentSize.height/2+15)];
         
         [scorelabel1 setAnchorPoint:ccp(0, 0.5)];
         [scorelabel1 setColor:ccc3(0, 0, 0)];
-        [scorelabel1 setPosition:ccp(m_scoreItem.contentSize.width/2-100,
-                                    m_scoreItem.contentSize.height/2)];
+        [scorelabel1 setPosition:ccp(m_scoreItem.contentSize.width/2-50,
+                                    m_scoreItem.contentSize.height/2+15)];
         
         [timelabel setAnchorPoint:ccp(0, 0.5)];
         [timelabel setColor:ccc3(0, 0, 0)];
-        [timelabel setPosition:ccp(m_timeItem.contentSize.width/2-100,
+        [timelabel setPosition:ccp(m_timeItem.contentSize.width/2-50,
                                    m_timeItem.contentSize.height/3)];
         
         [timelabel1 setAnchorPoint:ccp(0, 0.5)];
         [timelabel1 setColor:ccc3(0, 0, 0)];
-        [timelabel1 setPosition:ccp(m_timeItem.contentSize.width/2-100,
+        [timelabel1 setPosition:ccp(m_timeItem.contentSize.width/2-50,
                                    m_timeItem.contentSize.height/3)];
         
         [m_labelScore setAnchorPoint:ccp(0, 0.5)];
         [m_labelScore setColor:ccc3(0, 0, 0)];
         [m_labelScore setPosition:ccp(m_scoreItem.contentSize.width/2+10,
-                                      m_scoreItem.contentSize.height/2)];
+                                      m_scoreItem.contentSize.height/2+15)];
         [m_labelScore1 setAnchorPoint:ccp(0, 0.5)];
         [m_labelScore1 setColor:ccc3(0, 0, 0)];
         [m_labelScore1 setPosition:ccp(m_scoreItem.contentSize.width/2+10,
-                                      m_scoreItem.contentSize.height/2)];
+                                      m_scoreItem.contentSize.height/2+15)];
         
         [m_labelTime setAnchorPoint:ccp(0, 0.5)];
         [m_labelTime setColor:ccc3(0, 0, 0)];

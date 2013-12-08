@@ -24,9 +24,9 @@
     
     BOOL m_drawLine, m_drawLine2;
     
-    BOOL m_objectHasContina;
+    BOOL m_objectHasContina, m_objectHasContina2;
     
-    BOOL m_removeAllSameColor;
+    BOOL m_removeAllSameColor, m_removeAllSameColor2;
     
     BOOL m_toolsDisappear, m_toolsDisappear2;
     

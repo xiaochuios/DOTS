@@ -23,6 +23,15 @@
     
     CGFloat width = [self anchorPoint].x * m_w + x * m_w +addWidth2;
     CGFloat height = [self anchorPoint].y * m_h + y * m_h +AddHeigh2;
+  
+    return ccp(width, height);
+}
+
+-(CGPoint) calcPos2:(NSInteger)x y:(NSInteger) y{
+    
+    CGFloat width = [self anchorPoint].x * m_w - x * m_w +addWidth2;
+    CGFloat height = [self anchorPoint].y * m_h - y * m_h +AddHeigh2;
+    
     return ccp(width, height);
 }
 
@@ -71,7 +80,7 @@
     
     m_drawNode = [CCDrawNode node];
         
-    [m_drawNode setPosition:ccp(wd, size.height)];
+    [m_drawNode setPosition:ccp(wd, size.height/2)];
     
     [m_drawNode setContentSize:CGSizeMake(DRAWSPRITE_RADIUES, DRAWSPRITE_RADIUES)];
     
@@ -89,6 +98,44 @@
 //    [m_drawNode clear];
 }
 
+-(void)spawnAtX2:(NSInteger)x Y:(NSInteger)y Width:(CGFloat)w Height:(CGFloat)h addWidth2:(NSInteger)a AddHeigh2:(NSInteger)b{
+    
+    m_hasSelected = YES;
+    m_disappear = NO;
+    m_x = x;
+    m_y = y;
+    addWidth2=a;
+    AddHeigh2=b;
+    m_w = w*2;
+    m_h = h*2;
+    
+    [self calcColor];
+    
+    //    [self setContentSize:CGSizeMake(DRAWSPRITE_RADIUES, DRAWSPRITE_RADIUES)];
+    
+    CGSize size = [CCDirector sharedDirector].winSize;
+    CGFloat wd = [self anchorPoint].x * m_w - x * m_w+addWidth2;
+    
+    m_drawNode = [CCDrawNode node];
+    
+    [m_drawNode setPosition:ccp(wd, 400)];
+    
+    [m_drawNode setContentSize:CGSizeMake(DRAWSPRITE_RADIUES, DRAWSPRITE_RADIUES)];
+    
+    [self addChild:m_drawNode];
+    
+    [m_drawNode drawDot:ccp(0, 0) radius:DRAWSPRITE_RADIUES color:m_color];
+    
+    m_selectNode = [CCDrawNode node];
+    [m_drawNode addChild:m_selectNode];
+    
+    ccColor4F col = ccc4f(m_color.r, m_color.g, m_color.b, 255*0.75);
+    
+    [m_selectNode drawDot:ccp(0, 0) radius:DRAWSPRITE_RADIUES color:col];
+    m_selectNode.visible = false;
+    //    [m_drawNode clear];
+}
+
 -(void)respawn{
     
     m_disappear = NO;
@@ -104,7 +151,7 @@
     CGSize size = [CCDirector sharedDirector].winSize;
     CGFloat wd = [self anchorPoint].x * m_w + m_x * m_w +addWidth2;
     
-    [m_drawNode setPosition:ccp(wd, size.height)];
+    [m_drawNode setPosition:ccp(wd, size.height/2)];
     
     [m_drawNode drawDot:self.position radius:DRAWSPRITE_RADIUES color:m_color];
     
@@ -114,6 +161,34 @@
     
     [self respawnDropdown];
 }
+
+-(void)respawn2{
+    
+    m_disappear = NO;
+    [m_drawNode stopAllActions];
+    [m_drawNode clear];
+    [m_drawNode setScale:1.0];
+    
+    [m_selectNode clear];
+    [m_selectNode setScale:1.0];
+    
+    [self calcColor];
+    
+    CGSize size = [CCDirector sharedDirector].winSize;
+    CGFloat wd = [self anchorPoint].x * m_w - m_x * m_w +addWidth2;
+    
+    //[m_drawNode setPosition:ccp(wd-100, size.height)];
+    [m_drawNode setPosition:ccp(wd, 400)];
+    
+    [m_drawNode drawDot:self.position radius:DRAWSPRITE_RADIUES color:m_color];
+    
+    ccColor4F col = ccc4f(m_color.r, m_color.g, m_color.b, 255*0.75);
+    
+    [m_selectNode drawDot:ccp(0, 0) radius:DRAWSPRITE_RADIUES color:col];
+    
+    [self respawnDropdown2];
+}
+
 
 -(void) spawnDropdown{
     m_dropCount = 0;
@@ -137,6 +212,30 @@
     
     [m_drawNode runAction:seq];
 }
+
+-(void) spawnDropdown2{
+    m_dropCount = 0;
+    
+    [self stopAllActions];
+    
+    CGPoint pos = [self calcPos2:m_x y:m_y];
+    
+    CCActionInterval * wait = [CCActionInterval actionWithDuration:m_y*SPAWN_DROPDOWN_TIME/5];
+    
+    CCMoveTo * moveto = [CCMoveTo actionWithDuration:SPAWN_DROPDOWN_TIME/2 position:pos];
+    
+    CCJumpTo * jump = [CCJumpTo actionWithDuration:SPAWN_JUMP_TIME position:pos height:30 jumps:1];
+    
+    CCCallBlockO * callB = [CCCallBlockO actionWithBlock:^(id object) {
+        m_hasSelected = NO;
+        self.visible = YES;
+    } object:self];
+    
+    CCSequence * seq = [CCSequence actions:wait,moveto,jump,callB, nil];
+    
+    [m_drawNode runAction:seq];
+}
+
 -(void) respawnDropdown{
     m_dropCount = 0;
     
@@ -145,6 +244,29 @@
     CGPoint pos = [self calcPos:m_x y:m_y];
     
 //    CCActionInterval * wait = [CCActionInterval actionWithDuration:m_y*SPAWN_DROPDOWN_TIME/5];
+    
+    CCMoveTo * moveto = [CCMoveTo actionWithDuration:SPAWN_DROPDOWN_TIME/3 position:pos];
+    
+    CCJumpTo * jump = [CCJumpTo actionWithDuration:SPAWN_JUMP_TIME/3*2 position:pos height:20 jumps:1];
+    
+    CCCallBlockO * callB = [CCCallBlockO actionWithBlock:^(id object) {
+        m_hasSelected = NO;
+        self.visible = YES;
+    } object:self];
+    
+    CCSequence * seq = [CCSequence actions:moveto,jump,callB, nil];
+    
+    [m_drawNode runAction:seq];
+}
+
+-(void) respawnDropdown2{
+    m_dropCount = 0;
+    
+    [self stopAllActions];
+    
+    CGPoint pos = [self calcPos2:m_x y:m_y];
+    
+    //    CCActionInterval * wait = [CCActionInterval actionWithDuration:m_y*SPAWN_DROPDOWN_TIME/5];
     
     CCMoveTo * moveto = [CCMoveTo actionWithDuration:SPAWN_DROPDOWN_TIME/3 position:pos];
     
@@ -188,6 +310,26 @@
     m_dropCount = 0;
 }
 
+-(void)resetDropdown2{
+    
+    m_hasSelected = YES;
+    
+    CGPoint pos = [self calcPos2:m_x y:m_y];
+    
+    CCMoveTo *moveto = [CCMoveTo actionWithDuration:RESET_DROPDOWN_TIME position:pos];
+    
+    CCJumpTo * jump = [CCJumpTo actionWithDuration:RESET_JUMP_TIME/3
+                                          position:pos height:15 jumps:1];
+    
+    CCCallBlockO * callB = [CCCallBlockO actionWithBlock:^(id object) {
+        m_hasSelected = NO;
+    } object:self];
+    
+    CCSequence * seq = [CCSequence actions:moveto, jump, callB, nil];
+    
+    [m_drawNode runAction:seq];
+    m_dropCount = 0;
+}
 -(BOOL)positionInContent:(CGPoint)pos{
 //    
 //    CGFloat width = DRAWSPRITE_WIDTH;

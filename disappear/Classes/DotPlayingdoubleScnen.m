@@ -101,6 +101,7 @@
             [m_data moveOut];
             //            [m_hudController gamePause];
             [m_huddoubleController currentGameOver:m_score];
+            if(m_score < m_score2) [m_huddoubleController currentGameOver:m_score];
             [self unscheduleAllSelectors];
         }else{
             [m_huddoubleController resetTimeString:[NSString stringWithFormat:@"%d",m_timeCounter]];

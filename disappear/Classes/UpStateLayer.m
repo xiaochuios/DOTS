@@ -42,12 +42,12 @@
         
         [scorelabel setAnchorPoint:ccp(0, 0.5)];
         [scorelabel setColor:ccc3(0, 0, 0)];
-        [scorelabel setPosition:ccp(m_scoreItem.contentSize.width/2-100,
+        [scorelabel setPosition:ccp(m_scoreItem.contentSize.width/2-50,
                                     m_scoreItem.contentSize.height/3)];
         
         [timelabel setAnchorPoint:ccp(0, 0.5)];
         [timelabel setColor:ccc3(0, 0, 0)];
-        [timelabel setPosition:ccp(m_timeItem.contentSize.width/2-100,
+        [timelabel setPosition:ccp(m_timeItem.contentSize.width/2-50,
                                    m_timeItem.contentSize.height/3)];
         
         [m_labelScore setAnchorPoint:ccp(0, 0.5)];
