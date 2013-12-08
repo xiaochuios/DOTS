@@ -116,10 +116,21 @@
     [m_data moveIn];
 }
 
+-(void)toolstopGame{
+    //    m_toolstop = true;
+    //    m_timeCounterstop = 5;
+    //    m_pause = true;
+    //    [self schedule:@selector(tick1:)];
+    m_timeCounter += 5;
+    
+    
+    
+}
+
 -(void) playerUsedToolDisappear:(PLAYERTOOLTYPE)type{
     
     if (type == tooltime) {
-        
+        [self toolstopGame];
     }else{
         if (type == toolDisappearAll) {
             if([m_data allDrawNodeBeSelected:YES]){
