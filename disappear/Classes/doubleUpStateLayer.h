@@ -28,6 +28,8 @@
 
 -(void) resetTimeString:(NSString*)string;
 -(void) resetScoreString:(NSString*) string;
+-(void) resetTimeString2:(NSString*)string;
+-(void) resetScoreString2:(NSString*) string;
 
 -(void) startAnimationDisplay;
 

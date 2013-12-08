@@ -74,6 +74,12 @@
     [m_huddoubleController resetScoreString:scores];
 }
 
+-(void)playingScoreAdd2:(NSInteger)score{
+    
+    m_score2 += score;
+    NSString * scores = [NSString stringWithFormat:@"%d",m_score2];
+    [m_huddoubleController resetScoreString2:scores];
+}
 
 -(void) startTimerCounter{
     m_pause = false;

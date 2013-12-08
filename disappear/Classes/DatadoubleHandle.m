@@ -380,7 +380,7 @@ static inline int calcIndex(int x,int y){
 -(void)touchEnd2{
     m_drawLine2 = NO;
     
-    NSInteger disappearCount2 = 0;
+    NSInteger disappearCount = 0;
     
     if (m_stackArray2.count>=2) {
         if (m_removeAllSameColor) {
@@ -395,7 +395,7 @@ static inline int calcIndex(int x,int y){
                         [node disappear:YES];
                     }
                     [node disappear:NO];
-                    disappearCount2 ++;
+                    disappearCount ++;
                 }
             }
         }
@@ -407,7 +407,7 @@ static inline int calcIndex(int x,int y){
     [m_stackArray2 removeAllObjects];
     
     if (self.parent) {
-        [self.parent playingScoreAdd:disappearCount2];
+        [self.parent playingScoreAdd2:disappearCount];
         //        DotPlayingScnen * playing = (DotPlayingScnen*)self.parent;
         //
         //        if (playing) {

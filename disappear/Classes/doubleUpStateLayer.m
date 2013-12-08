@@ -132,6 +132,15 @@
    // [m_labelTime1 setString:string];
 }
 
+-(void)resetScoreString2:(NSString *)string{
+
+    [m_labelScore1 setString:string];
+    
+}
+-(void) resetTimeString2:(NSString *)string{
+    [m_labelTime1 setString:string];
+}
+
 -(void) menuBePressed:(id)sender{
     if (self.parent) {
         DotdoubleHudController *hc = (DotdoubleHudController*)self.parent;

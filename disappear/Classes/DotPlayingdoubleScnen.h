@@ -28,6 +28,9 @@
     NSInteger m_score;
     NSInteger m_timeCounter;
     
+    NSInteger m_score2;
+    NSInteger m_timeCounter2;
+    
     BOOL m_pause;
 }
 
@@ -36,6 +39,7 @@
 -(void) startDotGame;
 
 -(void) playingScoreAdd:(NSInteger) score;
+-(void) playingScoreAdd2:(NSInteger) score;
 
 -(void) playerUsedToolDisappear:(PLAYERTOOLTYPE) type;
 

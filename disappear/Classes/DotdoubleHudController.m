@@ -86,6 +86,12 @@
     [m_upstateLayer resetScoreString:string];
 }
 
+-(void)resetTimeString2:(NSString *)string{
+    [m_upstateLayer resetTimeString2:string];
+}
+-(void)resetScoreString2:(NSString *)string{
+    [m_upstateLayer resetScoreString2:string];
+}
 
 -(void)playerUseSkill:(PLAYERTOOLTYPE)skillTpye{
     if (self.parent) {
