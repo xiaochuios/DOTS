@@ -28,9 +28,9 @@
     
     BOOL m_removeAllSameColor;
     
-    BOOL m_toolsDisappear;
+    BOOL m_toolsDisappear, m_toolsDisappear2;
     
-    BOOL m_toolsDisappearType;
+    BOOL m_toolsDisappearType, m_toolsDisappearType2;
     
     BOOL m_canPlaying;
     
@@ -59,6 +59,7 @@
 -(void) disappearEnd;// 消除结束
 
 -(BOOL) allDrawNodeBeSelected:(BOOL) disappearType;//全部选中
+-(BOOL) allDrawNodeBeSelected2:(BOOL) disappearType;//全部选中
 
 //-(void) cancelAllDrawNodeBeSelected;// 取消全部选中的情况
 

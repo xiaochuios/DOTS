@@ -181,9 +181,9 @@ static inline int calcIndex(int x,int y){
 
 -(BOOL) touchBegine2:(CGPoint)local{
     
-    if (m_toolsDisappear) {
+    if (m_toolsDisappear2) {
         
-        [self toolDisappearSelected:local];
+        [self toolDisappearSelected2:local];
         
         return false;
     }
@@ -682,6 +682,40 @@ static inline int calcIndex(int x,int y){
     
 }
 
+-(void) toolDisappearSelected2:(CGPoint) local{
+    
+    DrawSprite * ds = [self getCurrentSelectSprite2:local];
+    
+    int count = 0;
+    
+    if (ds) {
+        
+        [self cancelAllDrawNodeBeSelected2];
+        
+        if (m_toolsDisappearType2) {
+            
+            m_currentDrawColor = ds.m_color;
+            count = [self disappearAllSameColorDotsWithSelected2];
+        }else{
+            [ds disappear:YES];
+            count = 1;
+        }
+        m_toolsDisappear2 = NO;
+        
+        
+        
+        if (self.parent) {
+            
+            DotPlayingScnen * playing = (DotPlayingScnen*)self.parent;
+            
+            if (playing) {
+                [playing playingScoreAdd2:count];
+            }
+        }
+    }
+    
+}
+
 //显示选中状态
 -(BOOL)allDrawNodeBeSelected:(BOOL)disappearType{
     
@@ -700,7 +734,18 @@ static inline int calcIndex(int x,int y){
         }
     }
     
-    //双人部分开始
+    
+    return YES;
+}
+-(BOOL)allDrawNodeBeSelected2:(BOOL)disappearType{
+    
+    if (m_toolsDisappear2) {
+        return NO;
+    }
+    
+    m_toolsDisappearType2 = disappearType;
+    m_toolsDisappear2 = YES;
+
     for (int i=0; i< m_drawSpriteArray2.count; i++) {
         
         DrawSprite *ds = (DrawSprite *)[m_drawSpriteArray2 objectAtIndex:i];
@@ -708,7 +753,6 @@ static inline int calcIndex(int x,int y){
             [ds KeepSelected];
         }
     }
-    //双人部分结束
     
     return YES;
 }
@@ -723,8 +767,10 @@ static inline int calcIndex(int x,int y){
             [ds unKeepSelected];
         }
     }
+}
+
+-(void) cancelAllDrawNodeBeSelected2{
     
-    //双人部分开始
     for (int i=0; i< m_drawSpriteArray2.count; i++) {
         
         DrawSprite *ds = (DrawSprite *)[m_drawSpriteArray2 objectAtIndex:i];
@@ -732,12 +778,7 @@ static inline int calcIndex(int x,int y){
             [ds unKeepSelected];
         }
     }
-    
-    //双人部分结束
-    
 }
-
-
 
 -(void) setx:(NSInteger)x Y:(NSInteger)y{
     w_x=x;
@@ -748,6 +789,7 @@ static inline int calcIndex(int x,int y){
 -(void)startPlaying{
     
     m_toolsDisappear = false;
+    m_toolsDisappear2 = false;
     m_canPlaying = YES;
     
     [self setTouchMode:kCCTouchesAllAtOnce];

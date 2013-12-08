@@ -128,6 +128,7 @@
 }
 -(void) resetTimeString:(NSString *)string{
     [m_labelTime setString:string];
+      [m_labelTime1 setString:string];
     
    // [m_labelTime1 setString:string];
 }
@@ -138,7 +139,7 @@
     
 }
 -(void) resetTimeString2:(NSString *)string{
-    [m_labelTime1 setString:string];
+   // [m_labelTime1 setString:string];
 }
 
 -(void) menuBePressed:(id)sender{

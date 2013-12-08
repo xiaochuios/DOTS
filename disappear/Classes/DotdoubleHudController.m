@@ -101,5 +101,13 @@
         }
     }
 }
+-(void)playerUseSkill2:(PLAYERTOOLTYPE)skillTpye{
+    if (self.parent) {
+        DotPlayingdoubleScnen * playing = (DotPlayingdoubleScnen*)self.parent;
+        if (playing) {
+            [playing playerUsedToolDisappear2:skillTpye];
+        }
+    }
+}
 
 @end

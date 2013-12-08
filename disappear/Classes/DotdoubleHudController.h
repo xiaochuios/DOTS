@@ -38,5 +38,6 @@
 -(void) startGame;
 
 -(void) playerUseSkill:(PLAYERTOOLTYPE) skillTpye;
+-(void) playerUseSkill2:(PLAYERTOOLTYPE) skillTpye;
 
 @end

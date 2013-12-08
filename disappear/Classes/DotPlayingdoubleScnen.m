@@ -116,6 +116,34 @@
     
     
 }
+//-(void) tick1:(float) dt{
+//    
+//    m_delta +=dt;
+//    
+//    if (m_delta2>=0.9999) {
+//        m_delta2 = 0.0;
+//        m_timeCounterstop -=1;
+//        if (m_timeCounterstop<=0) {
+//            m_toolstop = false;
+//            m_pause = false;
+//            [self unscheduleAllSelectors];
+//        }else{
+//            
+//        }
+//    }
+//
+//
+//}
+-(void)toolstopGame{
+//    m_toolstop = true;
+//    m_timeCounterstop = 5;
+//    m_pause = true;
+//    [self schedule:@selector(tick1:)];
+    m_timeCounter += 10;
+    
+    
+    
+}
 
 -(void) resumeGame{
     m_pause = false;
@@ -125,6 +153,7 @@
 -(void) playerUsedToolDisappear:(PLAYERTOOLTYPE)type{
     
     if (type == tooltime) {
+        [self toolstopGame];
         
     }else{
         if (type == toolDisappearAll) {
@@ -139,6 +168,25 @@
         }
     }
 }
+-(void) playerUsedToolDisappear2:(PLAYERTOOLTYPE)type{
+    
+    if (type == tooltime) {
+        [self toolstopGame];
+        
+    }else{
+        if (type == toolDisappearAll) {
+            if([m_data allDrawNodeBeSelected2:YES]){
+                
+            }
+        }else{
+            
+            if([m_data allDrawNodeBeSelected2:NO]){
+                
+            }
+        }
+    }
+}
+
 
 
 @end

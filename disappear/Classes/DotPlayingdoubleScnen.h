@@ -24,14 +24,17 @@
     
     
     CGFloat m_delta;
+    CGFloat m_delta2;
     
     NSInteger m_score;
     NSInteger m_timeCounter;
+    NSInteger m_timeCounterstop;
     
     NSInteger m_score2;
     NSInteger m_timeCounter2;
     
     BOOL m_pause;
+    BOOL m_toolstop;
 }
 
 +(CCScene*)scene;
@@ -42,8 +45,10 @@
 -(void) playingScoreAdd2:(NSInteger) score;
 
 -(void) playerUsedToolDisappear:(PLAYERTOOLTYPE) type;
+-(void) playerUsedToolDisappear2:(PLAYERTOOLTYPE) type;
 
 -(void) pauseGame;
+//-(void) toolstopGame;
 -(void) resumeGame;
 
 @end

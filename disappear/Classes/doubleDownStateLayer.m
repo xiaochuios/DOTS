@@ -24,9 +24,9 @@
         CCMenuItemImage * skillOne = [CCMenuItemImage itemWithNormalImage:@"stoptimebutton.png" selectedImage:@"stoptimebutton_back.png" target:self selector:@selector(skillOnePressed)];
         CCMenuItemImage * skillTwo = [CCMenuItemImage itemWithNormalImage:@"deleteonebutton.png" selectedImage:@"deleteonebutton_back.png" target:self selector:@selector(skillTwoPressed)];
         CCMenuItemImage * skillThree = [CCMenuItemImage itemWithNormalImage:@"deleteallbutton.png" selectedImage:@"deleteallbutton_back.png" target:self selector:@selector(skillThreePressed)];
-           CCMenuItemImage * skillOne1 = [CCMenuItemImage itemWithNormalImage:@"stoptimebutton.png" selectedImage:@"stoptimebutton_back.png" target:self selector:@selector(skillOnePressed)];
-        CCMenuItemImage * skillTwo1 = [CCMenuItemImage itemWithNormalImage:@"deleteonebutton.png" selectedImage:@"deleteonebutton_back.png" target:self selector:@selector(skillTwoPressed)];
-        CCMenuItemImage * skillThree1 = [CCMenuItemImage itemWithNormalImage:@"deleteallbutton.png" selectedImage:@"deleteallbutton_back.png" target:self selector:@selector(skillThreePressed)];
+           CCMenuItemImage * skillOne1 = [CCMenuItemImage itemWithNormalImage:@"stoptimebutton.png" selectedImage:@"stoptimebutton_back.png" target:self selector:@selector(skillOnePressed2)];
+        CCMenuItemImage * skillTwo1 = [CCMenuItemImage itemWithNormalImage:@"deleteonebutton.png" selectedImage:@"deleteonebutton_back.png" target:self selector:@selector(skillTwoPressed2)];
+        CCMenuItemImage * skillThree1 = [CCMenuItemImage itemWithNormalImage:@"deleteallbutton.png" selectedImage:@"deleteallbutton_back.png" target:self selector:@selector(skillThreePressed2)];
         
         
         [skillOne setAnchorPoint:ccp(0, 0)];
@@ -81,10 +81,23 @@
         [dhc playerUseSkill:tooltime];
     }
 }
+-(void) skillOnePressed2{
+    
+    if (self.parent) {
+        DotdoubleHudController * dhc = (DotdoubleHudController*)self.parent;
+        [dhc playerUseSkill2:tooltime];
+    }
+}
 -(void) skillTwoPressed{
     if (self.parent) {
         DotdoubleHudController * dhc = (DotdoubleHudController*)self.parent;
         [dhc playerUseSkill:toolDisappearOne];
+    }
+}
+-(void) skillTwoPressed2{
+    if (self.parent) {
+        DotdoubleHudController * dhc = (DotdoubleHudController*)self.parent;
+        [dhc playerUseSkill2:toolDisappearOne];
     }
 }
 -(void) skillThreePressed{
@@ -92,6 +105,12 @@
         DotdoubleHudController * dhc = (DotdoubleHudController*)self.parent;
         [dhc playerUseSkill:toolDisappearAll];
     }
+}
+-(void) skillThreePressed2{
+    if (self.parent) {
+    DotdoubleHudController * dhc = (DotdoubleHudController*)self.parent;
+        [dhc playerUseSkill2:toolDisappearAll];
+        }
 }
 
 @end
